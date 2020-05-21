@@ -185,6 +185,10 @@ hold on
 plot(y_record(:,7),y_record(:,8),'r','LineWidth',2,'HandleVisibility','off')
 plot(y_record(:,9),y_record(:,10),'r','LineWidth',2,'HandleVisibility','off')
 plot(y_record(:,11),y_record(:,12),'r','LineWidth',2,'HandleVisibility','off')
+plot(y_fromref_record(:,5),y_fromref_record(:,6),'k--','LineWidth',2)
+plot(y_fromref_record(:,7),y_fromref_record(:,8),'k--','LineWidth',2,'HandleVisibility','off')
+plot(y_fromref_record(:,9),y_fromref_record(:,10),'k--','LineWidth',2,'HandleVisibility','off')
+plot(y_fromref_record(:,11),y_fromref_record(:,12),'k--','LineWidth',2,'HandleVisibility','off')
 plot(y_record(1,5),y_record(1,6),'.r','MarkerSize',50,'LineWidth',2)
 plot(y_record(1,7),y_record(1,8),'.r','MarkerSize',50,'LineWidth',2,'HandleVisibility','off')
 plot(y_record(1,9),y_record(1,10),'.r','MarkerSize',50,'LineWidth',2,'HandleVisibility','off')
@@ -193,7 +197,7 @@ plot([radius_cnstr -radius_cnstr -radius_cnstr radius_cnstr radius_cnstr],...
     [radius_cnstr radius_cnstr -radius_cnstr -radius_cnstr radius_cnstr],...
     'r--','LineWidth',2);
 hold off
-legend('Trace of feature points','Starting Point',...
+legend('Trace of feature points','ref (unconstrained)','Starting Point',...
     'Constraints','location','Southeast')
 xlabel('x','Interpreter','latex')
 ylabel('y','Interpreter','latex')

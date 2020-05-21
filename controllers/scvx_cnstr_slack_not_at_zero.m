@@ -14,13 +14,13 @@ function [ubar,xibar,Jval,feasible,output] = scvx_cnstr_slack_not_at_zero(...
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % Constants
-    R = 0.001*eye(num_u);                                    % control penalty
-    R(1:3,1:3) = 50*eye(3);
-    R(3,3) = 1000;
-    Q = 0.1*eye(num_x);                                 % state penalty
+    R = 1*eye(num_u);                                    % control penalty
+    R(1:3,1:3) = 5000*eye(3);
+    R(3,3) = 5000;
+    Q = 10*eye(num_x);                                 % state penalty
     Q(4:6,4:6) = 0.0001*eye(3);
     Q(10:12,10:12) = 0.0001*eye(3);
-    mu = 10^5*eye(num_cnstr);                          % slack penalty
+    mu = 10^9*eye(num_cnstr);                          % slack penalty
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
     % Build the QP

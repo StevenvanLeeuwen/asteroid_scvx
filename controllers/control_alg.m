@@ -82,7 +82,7 @@ function [ubar,xibar,Jval,feasible,output,U,Y,K,ref_adj] = control_alg(t,xi,xi_i
 
         % Evaluate Y_tilde_inf_beta
         [Y,U] = compute_constraints(1,foview_subtract,...
-        sysControl.A-sysControl.B*K,sysNoise.B,sysNoise.C,sysNoise.D,...
+        sysControl.A-sysControl.B*K,sysNoise.B,sysNoise.C,sysNoise.D,K,...
         P_NN,Xi_0,num_horz,betaa);
         
     % 2. Formulate the QP and solve
@@ -109,13 +109,6 @@ function [ubar,xibar,Jval,feasible,output,U,Y,K,ref_adj] = control_alg(t,xi,xi_i
             xistack(num_x*(cnt-1)+1:num_x*cnt) = xi-ref_adj;
         end
         [ubar,xibar,Jval,feasible,output] = scvx_cnstr_slack_not_at_zero(...
-            xistack,xirefstack,urefstack,A0stack,B,C0stack,Y,U,num_horz);
-
-        for k = 1:num_horz
-            if any(abs(ubar((k-1)*num_u+1:k*num_u)+K*xibar((k-1)*num_x+1:k*num_x))...
-                >= U.b(1:num_u))
-                disp('    WARNING: v not feasible');
-            end
-        end  
+            xistack,xirefstack,urefstack,A0stack,B,C0stack,Y,U,num_horz);  
         
 end

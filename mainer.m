@@ -9,13 +9,13 @@ load fp_close.mat
 omega=2*pi/(5.27*3600);        %rotation rate (rads/sec)
     
 % time
-tfinal = 250; %s
+tfinal = 150; %s
 tau = 1;
 tspan = 0:tau:tfinal;
-tdescent = 200;
+tdescent = 120;
 
 % state
-xi_init = [-1.57;1.32;6.75;0;0;0;0;0;0;0;0;0]; %km km/s rad rad/s
+xi_init = [-1.07;0.82;5.75;0;0;0;0;0;0;0;0;0]; %km km/s rad rad/s
 t = 0;
 xi = xi_init;
 ref_adj = xi_init;
@@ -37,12 +37,12 @@ for t = tspan
     if t <= tdescent
         ref(:,cnt) = [-1.07+((tdescent-t)/tdescent)*(xi_init(1)--1.07);...
             0.82+((tdescent-t)/tdescent)*(xi_init(2)-0.82);...
-            5.8+((tdescent-t)/tdescent)*(xi_init(3)-5.8);...
+            5.61+((tdescent-t)/tdescent)*(xi_init(3)-5.61);...
             0;0;0;th_ref;0;0;0];
     else
         ref(:,cnt) = [-1.07;...
             0.82;...
-            5.8;...
+            5.61;...
             0;0;0;th_ref;0;0;0];
     end
     cnt = cnt+1;
