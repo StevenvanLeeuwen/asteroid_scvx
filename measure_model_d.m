@@ -46,7 +46,7 @@ function y = measure_model_d(t,xi,fp,f,N_,N_c,N_b)
     for k = 1:4
         D_a(:,k) = [xi(1)-fp(k).x; xi(2)-fp(k).y; xi(3)-fp(k).z];
         D_b(:,k) = Rba*D_a(:,k);
-        D_b_hat(:,k) = D_b(:,k)+(1-dot(-D_b(:,k)/norm(D_b(:,k),2),e_3))*N_(:,k);
+        D_b_hat(:,k) = D_b(:,k)+(1-abs(D_b(3,k))/norm(D_b(:,k),2))*N_(:,k);
         d_b_hat(k) = norm(D_b_hat(:,k),2);
         c(:,k) = ((f/([0 0 1]*D_b_hat(:,k)))+N_c)*[1 0 0;0 1 0]*D_b_hat(:,k);
     end
