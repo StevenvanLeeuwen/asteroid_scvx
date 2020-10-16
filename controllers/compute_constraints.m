@@ -114,37 +114,19 @@ function [Y_tilde_inf_beta,U] = compute_constraints(Y_update,foview_subtract,...
         
         if k_prop ~= 0
             try
-            [A,b] = noredund(Y_tilde_inf_beta.A(:,[5:12,num_measure+3]),...
-                Y_tilde_inf_beta.b);
+            Y_tilde_inf_beta = Y_tilde_inf_beta.minHRep();
             catch
                 disp('    WARNING: Could not reduce redundancies. (first attempt)');
             end
-            
-            A_noredund = zeros(size(A,1),num_output);
-            A_noredund(:,[5:12,num_measure+3]) = A;
-            b_noredund = b;
-            Y_tilde_inf_beta = Polyhedron('A',A_noredund,'B',b_noredund);
             
             % Ensure not empty
             if isEmptySet(Y_tilde_inf_beta)
                 disp('    WARNING: Y_tilde_inf_beta is empty.');
             end
             
-           try
-            [A_u,b_u] = noredund(U_tilde_inf_beta.A,...
-                U_tilde_inf_beta.b);
-            catch
-                disp('    WARNING: Could not reduce U redundancies. (first attempt)');
-            end
-            
-            A_u_noredund = A_u;
-            b_u_noredund = b_u;
-            U_tilde_inf_beta = Polyhedron('A',A_u_noredund,'B',b_u_noredund);
-            
-            % Ensure not empty
             if isEmptySet(U_tilde_inf_beta)
                 disp('    WARNING: U_tilde_inf_beta is empty.');
-            end 
+            end
             
         end
     
